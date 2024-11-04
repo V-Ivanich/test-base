@@ -1,0 +1,64 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url(../fonts/Roboto-Light.ttf);
+}
+
+:root {
+  --body-bg-color: #648c95;
+  --color-primary: #c8d8dc;
+  --color-secondary: #93b0b7;
+  --color-dark-light: #41717d;
+  --color-dark: #255965;
+  --color-danger: #f37e30a8;
+
+  --light-blue: #5dacf2;
+  --dark-blue: #3c6dad;
+  --dark-grey: #9097b1;
+  --creem: #f2e6d7;
+  --blue-grey: #7899c1;
+  --white: #f3eae7;
+  --light-yellow: #fcf0c4;
+  --yellow: #fed363;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto";
+}
+
+body {
+  width: 1280px;
+  margin: 0 auto;
+  background-color: var(--body-bg-color);
+  color: var(--color-primary);
+}
+
+.container {
+  position: relative;
+  display: flex;
+  gap: .5rem;
+  padding: 0.5rem;
+  margin: 0.25rem 0;
+  border: 1px solid var(--color-dark-light);
+  border-radius: 6px;
+}
+
+input {
+  width: 90%;
+  background: transparent;
+  color: var(--color-primary);
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid var(--color-secondary);
+}
+
+input:focus {
+  border-bottom: 1px solid var(--color-dark-light);
+  border-radius: 3px;
+}
+
+li {
+  list-style: none;
+}

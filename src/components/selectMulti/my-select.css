@@ -1,0 +1,47 @@
+.btn {
+  margin-bottom: 0.2rem;
+  padding: 0.2rem 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.btn:hover {
+  width: 100%;
+  text-align: center;
+  color: var(--color-dark);
+  background-color: var(--color-primary);
+  border-bottom: 2px solid var(--color-dark-light);
+  border-radius: 8px;
+}
+
+.btn:active {
+  color: var(--color-primary);
+}
+
+.wrapper-select {
+  position: relative;
+  display: flex;
+  margin: 0;
+  background: transparent;
+  gap: .8rem;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.select-options {
+  position: absolute;
+  min-width: 100px;
+  top: 1.6rem;
+  padding: 0;
+  background-color: var(--color-secondary);
+  border-radius: 6px;
+  text-align: center;
+  z-index: 3;
+}
+
+.select-active {
+  color: var(--color-dark);
+  background-color: var(--color-primary);
+  border-bottom: 2px solid var(--color-dark-light);
+  border-radius: 8px;
+}

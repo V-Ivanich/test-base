@@ -1,0 +1,35 @@
+.modal-window {
+  position: absolute;
+  width: 100%;
+  height: 120px;
+  top: 60px;
+  left: 0;
+  background-color: #3b709bb4;
+  border-radius: 8px;
+}
+
+.action-btn {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.action-btn button {
+  margin: .4rem .8rem;
+  padding: .2rem .8rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #7ed9ece8;
+}
+
+.title-header {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: .8rem;
+}
+
+.colons {
+  color: black;
+  text-align: center;
+}

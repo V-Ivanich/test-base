@@ -1,0 +1,102 @@
+{
+  "allorders": [
+    {
+    "id": "erttd34",
+    "id_order": "01.10.24",
+    "order": "OOO ГОИ",
+    "ispolnitel": "Impuls",
+    "type_item": "K-8 108x45x3",
+    "coint": 34,
+    "inside": "ttg 65trr",
+    "outside": "hye moe",
+    "date_cashe": "24.10.24",
+    "date_out": "2024.11.29",
+    "active": true
+  },
+      {
+    "id": "d6euwud4",
+    "id_order": "05.10.24",
+    "order": "ЗАО Tydex",
+    "ispolnitel": "Impuls",
+    "type_item": "K-108 108x45x3",
+    "coint": 50,
+    "inside": "ttg 111122trr",
+    "outside": "2843743783829",
+    "date_cashe": "04.10.24",
+    "date_out": "2024.11.24",
+    "active": true
+  },
+      {
+    "id": "980ed",
+    "id_order": "08.10.24",
+    "order": "OOO Ebati",
+    "ispolnitel": "Impuls",
+    "type_item": "Ge 120",
+    "coint": 12,
+    "inside": "ttg 900sjsjd3trr",
+    "outside": "pizdec",
+    "date_cashe": "24.10.24",
+    "date_out": "2024.01.21",
+    "active": true
+  }
+  ],
+  "users": [
+    {"id": "o113v", "name": "Vasia", "status": "optik"},
+    {"id": "o202s", "name": "Serg", "status": "optik"},
+    {"id": "o32k", "name": "Kate", "status": "optik"},
+    {"id": "z41a", "name": "Andrey", "status": "grinder"},
+    {"id": "i44d", "name": "Dasha", "status": "otk"},
+    {"id": "v55", "name": "Valia", "status": "otk"}
+      ],
+
+  "works":[
+  {
+    "id": "3738d",
+    "id_order": "01.10.24",
+    "date": "13.10.24",
+    "incount": 40,
+    "user": "o113v",
+    "user_otk": "i44d",
+    "date_otk": "21.10.24",
+    "goot": 33,
+    "no_goot": 5,
+    "fuck": 2
+  },
+    {
+    "id": "098dc",
+    "id_order": "05.10.24",
+    "date": "03.10.24",
+    "incount": 44,
+    "user": "o202s",
+    "user_otk": "v55",
+    "date_otk": "25.10.24",
+    "goot": 33,
+    "no_goot": 7,
+    "fuck": 4
+  },
+    {
+    "id": "qew0d7",
+    "id_order": "08.10.24",
+    "date": "10.10.24",
+    "incount": 42,
+    "user": "o32k",
+    "user_otk": "v55",
+    "date_otk": "29.10.24",
+    "goot": 30,
+    "no_goot": 5,
+    "fuck": 7
+  },
+      {
+    "id": "qew021117",
+    "id_order": "08.10.24",
+    "date": "14.10.24",
+    "incount": 42,
+    "user": "z41a",
+    "user_otk": "i44d",
+    "date_otk": "30.10.24",
+    "goot": 38,
+    "no_goot": 5,
+    "fuck": 7
+  }
+  ]
+}

@@ -1,0 +1,73 @@
+.wrapper_card {
+  margin-top: .2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+table {
+  padding: .2rem;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border: 1px solid var(--color-dark-light);
+  color: var(--color-primary);
+  font-size: 1rem;
+}
+
+th {
+  padding: .4rem 1rem;
+  border: 1px solid var(--color-dark-light);
+}
+
+td {
+  padding: .2rem;
+  text-align: center;
+  border: 1px solid var(--color-dark-light);
+}
+
+select {
+  font-size: inherit;
+  border: none;
+}
+
+.general-table tbody tr {
+  cursor: pointer;
+}
+
+.row-tab:hover {
+  background: var(--color-danger);
+}
+
+.row-tab:active {
+  background: var(--color-primary);
+  color: var(--color-dark);
+}
+
+.btn-header,
+.btn-active {
+  background: transparent;
+  font-size: inherit;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-header {
+  color: var(--color-primary);
+}
+
+.btn-header:hover,
+.btn-active:hover {
+  color: var(--color-secondary);
+}
+
+.btn-header:active {
+  color: var(--color-dark-light);
+}
+
+.btn-active {
+  color: var(--color-dark-light);
+}
+
+.btn-active:active {
+  color: var(--color-primary);
+}

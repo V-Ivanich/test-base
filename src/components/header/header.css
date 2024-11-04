@@ -1,0 +1,71 @@
+.menu__container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  padding: .2rem 1rem;
+  justify-content: space-between;
+  font-size: 1.1rem;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  line-height: 1;
+  border: none;
+  background-color: transparent;
+  font-family: inherit;
+  color: var(--color-primary);
+}
+
+a:hover {
+  color: var(--color-secondary);
+}
+
+.activeLink {
+  color: var(--color-dark-light);
+}
+
+a::after {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 1.2rem;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  content: '';
+  transition: width 0.3s ease-out;
+}
+
+a:hover::after {
+  width: 100%;
+}
+
+.active-window {
+  display: flex;
+  padding: 0 .8rem;
+  border-left: 1px solid var(--color-dark-light);
+  gap: 1rem;
+}
+
+.active-window>button {
+  border: none;
+  background: transparent;
+  color: var(--color-primary);
+  padding: 0 .8rem;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.active-window>button:hover {
+  color: rgb(131, 192, 146);
+}
+
+.active-window>button:active {
+  color: blueviolet;
+}
+
+.active-window>.btn-edit {
+  color: red;
+}
