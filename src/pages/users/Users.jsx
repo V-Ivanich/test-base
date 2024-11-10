@@ -23,8 +23,9 @@ const Users = () => {
   )
 
   const [isOpen, setIsOpen] = useState(false)
+  const [isSelect, setIsSelect] = useState(null)
 
-  const handleAddChangesUser =()=> {
+  const handleAddChangesUser = () => {
     setIsOpen(!isOpen)
   }
 
@@ -34,26 +35,29 @@ const Users = () => {
       el.classList.remove('row-user-active')
     })
     target.parentElement.classList.add('row-user-active')
+    setIsSelect(target.parentElement.dataset.id)
   }
 
   return (
     <div className='user-container'>
       {isOpen && (
         <div className='modal-users'>
-          <div className="header-user-modal">
-          <div className="input-section">
-            <input type='text' placeholder='Имя' />
+          <div className='header-user-modal'>
+            <div className='input-section'>
+              <input type='text' placeholder='Имя' />
+            </div>
+            <div className='select-section'>
+              <select>
+                {UsersStatus.map((status) => (
+                  <option key={status}>{status}</option>
+                ))}
+              </select>
+            </div>
           </div>
-          <div className="select-section">
-            <select>
-              {UsersStatus.map((status) => (
-                <option key={status}>{status}</option>
-              ))}
-            </select>     
-          </div>
-          </div>
-          <div className="btn-section">
-            <button className='btn-user'>Сохранить</button>
+          <div className='btn-section'>
+            <button className='btn-user' onClick={handleAddChangesUser}>
+              Сохранить
+            </button>
           </div>
         </div>
       )}
@@ -70,7 +74,11 @@ const Users = () => {
             </thead>
             <tbody ref={refBody}>
               {users.map((user) => (
-                <tr key={user.id} className='row-user' onClick={handleRowUser}>
+                <tr
+                  key={user.id}
+                  className='row-user'
+                  onClick={handleRowUser}
+                  data-id={user.id}>
                   {keysCol.map((col) => (
                     <td key={col}>{user[col]}</td>
                   ))}
@@ -84,8 +92,18 @@ const Users = () => {
       </div>
 
       <div className='action-user-btn'>
-        <button className='btn-user' onClick={handleAddChangesUser}>ДОБАВИТЬ</button>
-        <button className='btn-user' onClick={handleAddChangesUser}>ИЗМЕНИТЬ</button>
+        <button
+          className='btn-user'
+          onClick={handleAddChangesUser}
+          data-id='add'>
+          ДОБАВИТЬ
+        </button>
+        <button
+          className='btn-user'
+          onClick={handleAddChangesUser}
+          data-id='edit'>
+          ИЗМЕНИТЬ
+        </button>
         <button className='btn-user'>УДАЛИТЬ</button>
       </div>
     </div>
