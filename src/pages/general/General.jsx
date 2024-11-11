@@ -19,6 +19,7 @@ const keysCol = [
 ]
 
 export const BaseGeneral = () => {
+  sessionStorage.setItem('page', 'general')
   const { allorders } = useAllBase(
     useShallow((state) => ({
       allorders: state.allorders,

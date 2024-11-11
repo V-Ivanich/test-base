@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   display: flex;
-  padding: .2rem 1rem;
+  padding: 0.2rem 1rem;
   justify-content: space-between;
   font-size: 1.1rem;
 }
@@ -44,28 +44,28 @@ a:hover::after {
 
 .active-window {
   display: flex;
-  padding: 0 .8rem;
+  padding: 0 0.8rem;
   border-left: 1px solid var(--color-dark-light);
   gap: 1rem;
 }
 
-.active-window>button {
+.active-window > button {
   border: none;
   background: transparent;
   color: var(--color-primary);
-  padding: 0 .8rem;
-  font-size: inherit;
+  padding: 0 0.8rem;
+  font-size: 0.8rem;
   cursor: pointer;
 }
 
-.active-window>button:hover {
+.active-window > button:hover {
   color: rgb(131, 192, 146);
 }
 
-.active-window>button:active {
+.active-window > button:active {
   color: blueviolet;
 }
 
-.active-window>.btn-edit {
+.active-window > .btn-edit {
   color: red;
 }

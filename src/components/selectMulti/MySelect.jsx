@@ -135,4 +135,4 @@ MySelect.propTypes = {
   setFilterList: PropTypes.func,
 }
 
-export default MySelect
+export { MySelect }

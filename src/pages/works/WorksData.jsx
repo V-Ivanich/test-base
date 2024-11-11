@@ -1,10 +1,11 @@
 import { worksHeader } from '../../data/Data'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useAllBase } from '../../store/Store'
 import { useShallow } from 'zustand/shallow'
-import { useNavigate } from 'react-router-dom'
-import MySelect from '../../components/selectMulti/MySelect'
+import { MySelect } from '../../components/selectMulti/MySelect'
 import { filter, find } from 'lodash'
+
+import './works.css'
 
 const keysCol = [
   'id_order',
@@ -19,6 +20,7 @@ const keysCol = [
 ]
 
 export const WorksData = () => {
+  sessionStorage.setItem('page', 'work')
   const { works, users } = useAllBase(
     useShallow((state) => ({
       works: state.works,
@@ -26,7 +28,7 @@ export const WorksData = () => {
     })),
   )
 
-  const navigate = useNavigate()
+  const tableRef = useRef(null)
 
   const [orders, setOrders] = useState([])
   const [workers, setWorkers] = useState([])
@@ -42,8 +44,11 @@ export const WorksData = () => {
     } else return data
   }
 
-  function handleRowsWorks() {
-    navigate('/edit')
+  function handleRowsWorks({ target }) {
+    tableRef.current.childNodes.forEach((el) => {
+      el.classList.remove('active-work')
+    })
+    target.parentNode.classList.add('active-work')
   }
 
   function getOrderIsStorage(id) {
@@ -123,10 +128,10 @@ export const WorksData = () => {
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody ref={tableRef}>
             {filterOrders ? (
               filterOrders.map((el) => (
-                <tr key={el.id} onClick={handleRowsWorks}>
+                <tr key={el.id} className='row-tab' onClick={handleRowsWorks}>
                   {keysCol.map((kl) => (
                     <td key={kl}>{searchId(el[kl], kl)}</td>
                   ))}

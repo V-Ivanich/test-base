@@ -12,6 +12,11 @@ export const Header = () => {
     // localStorage.setItem('id_order', '')
   }
 
+  const handleEditWorks = () => {
+    setEditBtn(!editBtn)
+    setIsOpenModal(!isOpenModal)
+  }
+
   return (
     <div className='container'>
       {isOpenModal && <ModalWindow />}
@@ -41,7 +46,7 @@ export const Header = () => {
           <button onClick={() => setIsOpenModal(!isOpenModal)}>ДОБАВИТЬ</button>
           <button
             className={editBtn ? 'btn-edit' : ''}
-            onClick={() => setEditBtn(!editBtn)}>
+            onClick={handleEditWorks}>
             ИЗМЕНИТЬ
           </button>
         </div>
