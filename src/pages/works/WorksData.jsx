@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useAllBase } from '../../store/Store'
 import { useShallow } from 'zustand/shallow'
 import { MySelect } from '../../components/selectMulti/MySelect'
+import { ContextMenu } from '../../components/contexMenu/ContextMenu'
 import { filter, find } from 'lodash'
 
 import './works.css'
@@ -34,6 +35,7 @@ export const WorksData = () => {
   const [workers, setWorkers] = useState([])
   const [filterList, setFilterList] = useState([])
   const [filterOrders, setFilterOrders] = useState([])
+  const [isOpenContextMenu, setIsOpenContextMenu] = useState(false)
 
   function searchId(data, id) {
     if (id === 'user' || id === 'user_otk') {
@@ -46,6 +48,7 @@ export const WorksData = () => {
 
   function handleRowsWorks(event) {
     event.preventDefault()
+    setIsOpenContextMenu(!isOpenContextMenu)
     tableRef.current.childNodes.forEach((el) => {
       el.classList.remove('active-work')
     })
@@ -132,6 +135,7 @@ export const WorksData = () => {
             </tr>
           </thead>
           <tbody ref={tableRef}>
+            {isOpenContextMenu && <ContextMenu />}
             {filterOrders ? (
               filterOrders.map((el) => (
                 <tr

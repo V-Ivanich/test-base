@@ -1,3 +1,7 @@
+tbody {
+  position: relative;
+}
+
 .active-work {
   background: var(--color-primary);
   color: var(--color-dark);
