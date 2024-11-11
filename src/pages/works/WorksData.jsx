@@ -44,11 +44,14 @@ export const WorksData = () => {
     } else return data
   }
 
-  function handleRowsWorks({ target }) {
+  function handleRowsWorks(event) {
+    event.preventDefault()
     tableRef.current.childNodes.forEach((el) => {
       el.classList.remove('active-work')
     })
-    target.parentNode.classList.add('active-work')
+    console.log(event.button)
+    console.log(event.clientX, event.clientY)
+    event.target.parentNode.classList.add('active-work')
   }
 
   function getOrderIsStorage(id) {
@@ -124,14 +127,17 @@ export const WorksData = () => {
           <thead>
             <tr>
               {worksHeader.map((nam) => (
-                <th key={nam}>{renderHeader(nam)}</th>
+                <th key={nam.name}>{renderHeader(nam.name)}</th>
               ))}
             </tr>
           </thead>
           <tbody ref={tableRef}>
             {filterOrders ? (
               filterOrders.map((el) => (
-                <tr key={el.id} className='row-tab' onClick={handleRowsWorks}>
+                <tr
+                  key={el.id}
+                  className='row-tab'
+                  onContextMenu={handleRowsWorks}>
                   {keysCol.map((kl) => (
                     <td key={kl}>{searchId(el[kl], kl)}</td>
                   ))}

@@ -69,7 +69,7 @@ export const BaseGeneral = () => {
         <thead>
           <tr>
             {headers.map((nam) => (
-              <th key={nam}>{hedersTitle(nam)}</th>
+              <th key={nam.name}>{hedersTitle(nam.name)}</th>
             ))}
           </tr>
         </thead>
