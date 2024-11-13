@@ -41,31 +41,3 @@ a::after {
 a:hover::after {
   width: 100%;
 }
-
-.active-window {
-  display: flex;
-  padding: 0 0.8rem;
-  border-left: 1px solid var(--color-dark-light);
-  gap: 1rem;
-}
-
-.active-window > button {
-  border: none;
-  background: transparent;
-  color: var(--color-primary);
-  padding: 0 0.8rem;
-  font-size: 0.8rem;
-  cursor: pointer;
-}
-
-.active-window > button:hover {
-  color: rgb(131, 192, 146);
-}
-
-.active-window > button:active {
-  color: blueviolet;
-}
-
-.active-window > .btn-edit {
-  color: red;
-}

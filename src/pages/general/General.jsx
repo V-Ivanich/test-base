@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useShallow } from 'zustand/shallow'
 import { useAllBase } from '../../store/Store'
+import MyModal from '../../components/modalWindow/ModalWindow'
 import { sortBy } from 'lodash'
 import './general.css'
 
@@ -28,8 +29,14 @@ export const BaseGeneral = () => {
 
   const [dataGet, setDataGet] = useState([])
   const [isActive, setIsActive] = useState(false)
+  const [isOpenModal, setIsOpenModal] = useState(false)
 
   const navigate = useNavigate()
+
+  const handleContext = (e) => {
+    e.preventDefault()
+    setIsOpenModal(true)
+  }
 
   const handleRowClick = ({ target }) => {
     sessionStorage.setItem(
@@ -65,18 +72,26 @@ export const BaseGeneral = () => {
   return (
     // <div className='container'>
     <div className='wrapper_card'>
+      {/* {isOpenModal && <ModalWindow />} */}
+      <MyModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
       <table className='general-table'>
         <thead>
           <tr>
-            {headers.map((nam) => (
-              <th key={nam.name}>{hedersTitle(nam.name)}</th>
-            ))}
+            {headers.map((nam) => {
+              if (nam.name !== 'Активность') {
+                ;<th key={nam.name}>{hedersTitle(nam.name)}</th>
+              }
+            })}
           </tr>
         </thead>
         <tbody>
           {dataGet.length ? (
             dataGet.map((el) => (
-              <tr key={el.id} className='row-tab' onClick={handleRowClick}>
+              <tr
+                key={el.id}
+                className='row-tab'
+                onClick={handleRowClick}
+                onContextMenu={handleContext}>
                 {keysCol.map((kl) => (
                   <td key={kl}>{el[kl]}</td>
                 ))}

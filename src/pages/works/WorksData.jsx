@@ -36,6 +36,9 @@ export const WorksData = () => {
   const [filterList, setFilterList] = useState([])
   const [filterOrders, setFilterOrders] = useState([])
   const [isOpenContextMenu, setIsOpenContextMenu] = useState(false)
+  const [isOpenModal, setIsOpenModal] = useState(false)
+  const [actionButton, setActionButton] = useState(null)
+  const [pos, setPos] = useState({ posX: 0, posY: 0 })
 
   function searchId(data, id) {
     if (id === 'user' || id === 'user_otk') {
@@ -48,12 +51,11 @@ export const WorksData = () => {
 
   function handleRowsWorks(event) {
     event.preventDefault()
-    setIsOpenContextMenu(!isOpenContextMenu)
+    setIsOpenContextMenu(true)
     tableRef.current.childNodes.forEach((el) => {
       el.classList.remove('active-work')
     })
-    console.log(event.button)
-    console.log(event.clientX, event.clientY)
+    setPos({ posX: event.clientX, posY: event.clientY })
     event.target.parentNode.classList.add('active-work')
   }
 
@@ -125,6 +127,14 @@ export const WorksData = () => {
 
   return (
     <div className='wrapper_card'>
+      {isOpenModal && <ModalEditWork />}
+      {isOpenContextMenu && (
+        <ContextMenu
+          setActionButton={setActionButton}
+          setIsOpenContextMenu={setIsOpenContextMenu}
+          pos={pos}
+        />
+      )}
       {workers.length ? (
         <table>
           <thead>
@@ -135,7 +145,6 @@ export const WorksData = () => {
             </tr>
           </thead>
           <tbody ref={tableRef}>
-            {isOpenContextMenu && <ContextMenu />}
             {filterOrders ? (
               filterOrders.map((el) => (
                 <tr
