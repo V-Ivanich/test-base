@@ -1,9 +1,9 @@
 .modal-window {
   position: absolute;
-  width: 35%;
+  width: 33%;
   top: 20px;
-  left: 33%;
-  background-color: #3b709bb4;
+  left: 34%;
+  background-color: var(--color-secondary);
   border-radius: 8px;
 }
 
@@ -19,12 +19,13 @@
   border: none;
   border-radius: 6px;
   font-size: 1rem;
-  background-color: #7ed9ece8;
+  background-color: var(--color-primary);
+  color: var(--color-dark);
 }
 
 .title-header {
   display: flex;
-  width: 80%;
+  width: 78%;
   margin: 30px auto;
   flex-direction: column;
   justify-content: start;
@@ -36,12 +37,18 @@
   margin-bottom: 0.6rem;
   padding: 0.2rem 0.5rem;
   gap: 1.2rem;
-  color: black;
+  color: var(--color-dark);
   justify-content: space-between;
 }
 
 .colons > input {
   width: 200px;
+  color: var(--color-dark);
+  border-bottom: 1px solid var(--color-dark);
+}
+
+.colons > input[type='checkbox'] {
+  background-color: blue;
 }
 
 .bg {
@@ -63,10 +70,12 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0.2rem;
+  padding: 0.2rem 0.4rem;
   color: var(--color-primary);
 }
 
 .on-close:hover {
-  color: var(--color-secondary);
+  color: var(--color-dark);
+  background-color: var(--color-primary);
+  border-radius: 50%;
 }

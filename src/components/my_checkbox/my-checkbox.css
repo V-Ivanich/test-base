@@ -1,0 +1,19 @@
+.button-check {
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid var(--color-dark);
+  border-radius: 3px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btn-check {
+  border: none;
+  color: var(--color-dark);
+  cursor: pointer;
+  background: transparent;
+}
+
+.check-svg {
+  cursor: pointer;
+}

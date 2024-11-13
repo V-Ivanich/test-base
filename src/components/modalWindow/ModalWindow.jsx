@@ -1,5 +1,6 @@
 import { headers, worksHeader } from '../../data/Data'
 import { useState, useEffect } from 'react'
+import { MyCheck } from '../my_checkbox/myCheckbox'
 import { Button, Dialog, DialogPanel } from '@headlessui/react'
 
 import './modal_window.css'
@@ -27,7 +28,11 @@ export default function MyModal({ isOpenModal, setIsOpenModal }) {
               {isData.map((hed) => (
                 <div className='colons' key={hed.name}>
                   {hed.name}
-                  <input type={hed.type} />
+                  {hed.type === 'checkbox' ? (
+                    <MyCheck />
+                  ) : (
+                    <input type={hed.type} />
+                  )}
                 </div>
               ))}
             </div>

@@ -8,7 +8,7 @@ const headers = [
   { name: 'Чертеж заказчика', type: 'text' },
   { name: 'Оплата заказчиком', type: 'date' },
   { name: 'Срок исполнения', type: 'date' },
-  { name: 'Активность', type: 'checkbox' },
+  { name: 'Завершение', type: 'checkbox' },
 ]
 
 const worksHeader = [

@@ -78,7 +78,7 @@ export const BaseGeneral = () => {
         <thead>
           <tr>
             {headers.map((nam) => {
-              if (nam.name !== 'Активность') {
+              if (nam.name !== 'Завершение') {
                 ;<th key={nam.name}>{hedersTitle(nam.name)}</th>
               }
             })}
