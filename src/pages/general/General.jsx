@@ -3,9 +3,10 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useShallow } from 'zustand/shallow'
 import { useAllBase } from '../../store/Store'
-import MyModal from '../../components/modalWindow/ModalWindow'
-import { sortBy } from 'lodash'
+import { ContextMenu } from '../../components/contexMenu/ContextMenu'
+import { sortBy, find } from 'lodash'
 import './general.css'
+import { MyModal } from '../../components/modalWindow/ModalWindow'
 
 const keysCol = [
   'id_order',
@@ -19,6 +20,12 @@ const keysCol = [
   'date_out',
 ]
 
+const temlateBtn = [
+  { name: 'Добавить', value: 'add' },
+  { name: 'Изменить', value: 'edit' },
+  { name: 'Удалить', value: 'delete' },
+]
+
 export const BaseGeneral = () => {
   sessionStorage.setItem('page', 'general')
   const { allorders } = useAllBase(
@@ -30,12 +37,20 @@ export const BaseGeneral = () => {
   const [dataGet, setDataGet] = useState([])
   const [isActive, setIsActive] = useState(false)
   const [isOpenModal, setIsOpenModal] = useState(false)
+  const [position, setPosition] = useState({ x: 0, y: 0 })
+  const [isOpenContext, setIsOpenContext] = useState(false)
+  const [actionBtn, setActionBtn] = useState('')
+  const [selectionByContext, setSelectionByContext] = useState({})
 
   const navigate = useNavigate()
 
   const handleContext = (e) => {
     e.preventDefault()
-    setIsOpenModal(true)
+    setIsOpenContext(true)
+    setActionBtn('')
+    setPosition({ x: e.clientX, y: e.clientY })
+    const IdSelected = e.target.parentNode.firstElementChild.innerText
+    setSelectionByContext(find(allorders, ['id_order', IdSelected]))
   }
 
   const handleRowClick = ({ target }) => {
@@ -63,6 +78,27 @@ export const BaseGeneral = () => {
   }
 
   useEffect(() => {
+    console.log(actionBtn)
+    console.log(selectionByContext)
+    switch (actionBtn) {
+      case 'add':
+        setSelectionByContext({})
+        setIsOpenContext(false)
+        setIsOpenModal(true)
+        break
+      case 'edit':
+        setIsOpenContext(false)
+        setIsOpenModal(true)
+        break
+
+      default:
+        setIsOpenContext(false)
+        // setIsOpenModal(true)
+        break
+    }
+  }, [actionBtn])
+
+  useEffect(() => {
     if (isActive) {
       // setDataGet(allorders.sort(compare))
       setDataGet(sortBy(allorders, 'date_out'))
@@ -70,10 +106,24 @@ export const BaseGeneral = () => {
   }, [allorders, isActive])
 
   return (
-    // <div className='container'>
     <div className='wrapper_card'>
-      {/* {isOpenModal && <ModalWindow />} */}
-      <MyModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
+      {isOpenContext && (
+        <ContextMenu
+          position={position}
+          setActionBtn={setActionBtn}
+          setIsOpenContext={setIsOpenContext}
+          temlateBtn={temlateBtn}
+        />
+      )}
+      {isOpenModal && (
+        <MyModal
+          isOpenModal={isOpenModal}
+          setIsOpenModal={setIsOpenModal}
+          templateGeneral={headers}
+          datas={setDataGet}
+          editData={selectionByContext}
+        />
+      )}
       <table className='general-table'>
         <thead>
           <tr>
@@ -105,6 +155,5 @@ export const BaseGeneral = () => {
         </tbody>
       </table>
     </div>
-    // </div>
   )
 }

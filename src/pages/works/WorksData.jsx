@@ -4,6 +4,7 @@ import { useAllBase } from '../../store/Store'
 import { useShallow } from 'zustand/shallow'
 import { MySelect } from '../../components/selectMulti/MySelect'
 import { ContextMenu } from '../../components/contexMenu/ContextMenu'
+import { MyModal } from '../../components/modalWindow/ModalWindow'
 import { filter, find } from 'lodash'
 
 import './works.css'
@@ -18,6 +19,12 @@ const keysCol = [
   'goot',
   'no_goot',
   'fuck',
+]
+
+const temlateBtn = [
+  { name: 'Добавить', value: 'add' },
+  { name: 'Изменить', value: 'edit' },
+  { name: 'Удалить', value: 'delete' },
 ]
 
 export const WorksData = () => {
@@ -52,11 +59,7 @@ export const WorksData = () => {
   function handleRowsWorks(event) {
     event.preventDefault()
     setIsOpenContextMenu(true)
-    tableRef.current.childNodes.forEach((el) => {
-      el.classList.remove('active-work')
-    })
     setPos({ posX: event.clientX, posY: event.clientY })
-    event.target.parentNode.classList.add('active-work')
   }
 
   function getOrderIsStorage(id) {
@@ -99,6 +102,20 @@ export const WorksData = () => {
   }
 
   useEffect(() => {
+    switch (actionButton) {
+      case 'delete':
+        setIsOpenModal(true)
+        break
+      case 'edit':
+        setIsOpenModal(true)
+        break
+      default:
+        setIsOpenContextMenu(false)
+        break
+    }
+  }, [actionButton])
+
+  useEffect(() => {
     setFilterOrders(orders)
     setOrders(works)
     setWorkers(users)
@@ -127,12 +144,17 @@ export const WorksData = () => {
 
   return (
     <div className='wrapper_card'>
-      {isOpenModal && <ModalEditWork />}
+      <MyModal
+        isOpenModal={isOpenModal}
+        setIsOpenModal={setIsOpenModal}
+        editData={orders}
+      />
       {isOpenContextMenu && (
         <ContextMenu
-          setActionButton={setActionButton}
-          setIsOpenContextMenu={setIsOpenContextMenu}
-          pos={pos}
+          position={pos}
+          setActionBtn={setActionButton}
+          setIsOpenContext={setIsOpenContextMenu}
+          temlateBtn={temlateBtn}
         />
       )}
       {workers.length ? (

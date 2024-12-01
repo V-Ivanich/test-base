@@ -1,4 +1,4 @@
-.context-container {
+/* .context-container {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -22,4 +22,26 @@
 .btn-context:hover {
   background-color: var(--color-secondary);
   border-radius: 8px;
+} */
+.wrapper-context-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  z-index: 3;
+}
+
+.wrapper-context-menu {
+  position: absolute;
+  border-radius: 8px;
+  background-color: var(--color-secondary);
+  padding: 1.2rem;
+}
+
+.context-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 }
