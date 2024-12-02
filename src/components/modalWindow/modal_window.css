@@ -123,3 +123,8 @@
 .modal__label > input {
   margin-left: 1.2rem;
 }
+
+.modal__label {
+  display: flex;
+  justify-content: space-between;
+}

@@ -28,6 +28,7 @@ const temlateBtn = [
 ]
 
 export const WorksData = () => {
+  console.log('WORK RENDER!')
   sessionStorage.setItem('page', 'work')
   const { works, users } = useAllBase(
     useShallow((state) => ({
@@ -45,7 +46,7 @@ export const WorksData = () => {
   const [isOpenContextMenu, setIsOpenContextMenu] = useState(false)
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [actionButton, setActionButton] = useState(null)
-  const [pos, setPos] = useState({ posX: 0, posY: 0 })
+  const [pos, setPos] = useState({ x: 0, y: 0 })
 
   function searchId(data, id) {
     if (id === 'user' || id === 'user_otk') {
@@ -59,7 +60,7 @@ export const WorksData = () => {
   function handleRowsWorks(event) {
     event.preventDefault()
     setIsOpenContextMenu(true)
-    setPos({ posX: event.clientX, posY: event.clientY })
+    setPos({ x: event.clientX, y: event.clientY })
   }
 
   function getOrderIsStorage(id) {
@@ -144,17 +145,19 @@ export const WorksData = () => {
 
   return (
     <div className='wrapper_card'>
-      <MyModal
-        isOpenModal={isOpenModal}
-        setIsOpenModal={setIsOpenModal}
-        editData={orders}
-      />
       {isOpenContextMenu && (
         <ContextMenu
           position={pos}
           setActionBtn={setActionButton}
           setIsOpenContext={setIsOpenContextMenu}
           temlateBtn={temlateBtn}
+        />
+      )}
+      {isOpenModal && (
+        <MyModal
+          isOpenModal={isOpenModal}
+          setIsOpenModal={setIsOpenModal}
+          editData={orders}
         />
       )}
       {workers.length ? (

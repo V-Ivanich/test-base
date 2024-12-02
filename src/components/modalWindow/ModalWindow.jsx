@@ -25,7 +25,6 @@ export function MyModal({
         initialState[elem.name] = ''
       })
     }
-    console.log(initialState)
     return initialState
   }
 
@@ -71,7 +70,7 @@ export function MyModal({
 
   return (
     <>
-      <div className='modal' onClick={() => isOpenModal(false)}>
+      <div className='modal' onClick={() => setIsOpenModal(false)}>
         <div className='modal__container' onClick={(e) => e.stopPropagation()}>
           <button
             className='modal__btn-close'
