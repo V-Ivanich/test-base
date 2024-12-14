@@ -38,7 +38,6 @@
   background-color: var(--color-secondary);
   border-radius: 6px;
   text-align: center;
-  z-index: 3;
 }
 
 .select-active {

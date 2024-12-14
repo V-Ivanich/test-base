@@ -90,6 +90,7 @@
   background-color: var(--backgraund-bak);
   align-items: center;
   justify-content: center;
+  z-index: 100;
 }
 
 .modal__container {
@@ -97,6 +98,7 @@
   padding: 1.8rem;
   background-color: var(--color-dark-light);
   border-radius: 8px;
+  z-index: 200;
 }
 
 .modal__btn-close {

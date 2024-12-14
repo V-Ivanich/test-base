@@ -27,7 +27,6 @@ const temlateBtn = [
 ]
 
 export const BaseGeneral = () => {
-  console.log('global render?')
   sessionStorage.setItem('page', 'general')
   const { allorders } = useAllBase(
     useShallow((state) => ({
@@ -35,7 +34,6 @@ export const BaseGeneral = () => {
     })),
   )
 
-  console.log('render modul!')
   const [dataGet, setDataGet] = useState([])
   const [isActive, setIsActive] = useState(false)
   const [isOpenModal, setIsOpenModal] = useState(false)
@@ -65,13 +63,9 @@ export const BaseGeneral = () => {
 
   const handleBtnHeader = () => {
     setIsActive(!isActive)
-    // if (!isActive) {
-    //   setDataGet(sortBy(allorders, 'date_out'))
-    // } else setDataGet(allorders)
   }
 
   const hedersTitle = (text) => {
-    console.log(text)
     if (text === 'Срок исполнения') {
       return (
         <button
@@ -103,7 +97,6 @@ export const BaseGeneral = () => {
   }, [actionBtn])
 
   useEffect(() => {
-    console.log('render in use effect???')
     if (isActive) {
       // setDataGet(allorders.sort(compare))
       setDataGet(sortBy(allorders, 'date_out'))
@@ -124,7 +117,7 @@ export const BaseGeneral = () => {
         <MyModal
           isOpenModal={isOpenModal}
           setIsOpenModal={setIsOpenModal}
-          templateGeneral={headers}
+          templateForm={headers}
           datas={setDataGet}
           editData={selectionByContext}
         />

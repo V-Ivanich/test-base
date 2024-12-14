@@ -5,49 +5,49 @@ import { MyCheck } from '../my_checkbox/myCheckbox'
 import './modal_window.css'
 
 export function MyModal({
-  isOpenModal,
+  // isOpenModal,
   setIsOpenModal,
-  templateGeneral,
+  templateForm,
   datas,
   editData,
+  users,
 }) {
   const initialState = {}
 
   startArguments()
 
   function startArguments() {
-    if (editData && Array.isArray(templateGeneral)) {
+    if (Object.keys(editData).length && Array.isArray(templateForm)) {
       Object.assign(initialState, editData)
-    }
-
-    if (Array.isArray(templateGeneral)) {
-      templateGeneral.forEach((elem) => {
-        initialState[elem.name] = ''
+    } else if (Array.isArray(templateForm)) {
+      templateForm.forEach((elem) => {
+        initialState[elem.key_name] = ''
       })
     }
     return initialState
   }
 
-  const [valueState, setValueState] = useState(
-    editData ? editData : initialState,
-  )
+  const [valueState, setValueState] = useState(initialState)
   const [isData, setIsData] = useState([])
-  const [isOpenContextMenu, setIsOpenContextMenu] = useState(true)
+  // const [isOpenContextMenu, setIsOpenContextMenu] = useState(true)
 
   function close() {
     setIsOpenModal(false)
-    setIsOpenContextMenu(false)
+    // setIsOpenContextMenu(false)
   }
 
   const handleSubmit = () => {
     console.log(valueState, 'form return!')
-    if (!Array.isArray(templateGeneral)) {
+    if (!Array.isArray(templateForm)) {
       datas({ delete: true })
     } else datas(valueState)
     close()
   }
 
   const handleChanges = ({ target }) => {
+    console.log(valueState)
+    console.log(target.value, 'changes!!!')
+    console.log(target.name, 'имя????')
     setValueState({
       ...valueState,
       [target.name]: target.value,
@@ -55,6 +55,7 @@ export function MyModal({
   }
 
   const handleChecked = ({ target }) => {
+    console.log(target.checked)
     setValueState({
       ...valueState,
       [target.name]: target.checked,
@@ -78,8 +79,8 @@ export function MyModal({
             &#10006;
           </button>
           <div className='modal__form-content'>
-            {Array.isArray(templateGeneral)
-              ? templateGeneral.map((elem) => (
+            {Array.isArray(templateForm)
+              ? templateForm.map((elem) => (
                   <label key={elem.name} className='modal__label'>
                     {elem.name} -
                     {elem.type === 'select' ? (
@@ -89,15 +90,15 @@ export function MyModal({
                         value={valueState[elem.name]}>
                         <option value=''></option>
                         {users.map((user) => (
-                          <option key={user.id} value={user.name}>
-                            {user.name}
+                          <option key={user.id} value={user.status}>
+                            {user.status}
                           </option>
                         ))}
                       </select>
                     ) : (
                       <input
                         type={elem.type}
-                        name={elem.name}
+                        name={elem.key_name}
                         value={
                           elem.type === 'checkbox'
                             ? ''
@@ -117,9 +118,11 @@ export function MyModal({
                     )}
                   </label>
                 ))
-              : templateGeneral}
+              : templateForm}
             <div className='modal__actions-btn'>
-              <button onClick={handleSubmit}>Применить!</button>
+              <button onClick={handleSubmit} className='btn-user'>
+                Применить!
+              </button>
             </div>
           </div>
         </div>

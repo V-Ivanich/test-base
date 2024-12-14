@@ -28,7 +28,6 @@ const temlateBtn = [
 ]
 
 export const WorksData = () => {
-  console.log('WORK RENDER!')
   sessionStorage.setItem('page', 'work')
   const { works, users } = useAllBase(
     useShallow((state) => ({
@@ -40,12 +39,14 @@ export const WorksData = () => {
   const tableRef = useRef(null)
 
   const [orders, setOrders] = useState([])
+  const [dataGet, setDataGet] = useState([])
   const [workers, setWorkers] = useState([])
   const [filterList, setFilterList] = useState([])
   const [filterOrders, setFilterOrders] = useState([])
   const [isOpenContextMenu, setIsOpenContextMenu] = useState(false)
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [actionButton, setActionButton] = useState(null)
+  const [selectionByContext, setSelectionByContext] = useState({})
   const [pos, setPos] = useState({ x: 0, y: 0 })
 
   function searchId(data, id) {
@@ -60,7 +61,10 @@ export const WorksData = () => {
   function handleRowsWorks(event) {
     event.preventDefault()
     setIsOpenContextMenu(true)
+    setActionButton('')
     setPos({ x: event.clientX, y: event.clientY })
+    const IdSelected = event.target.parentNode.firstElementChild.innerText
+    setSelectionByContext(find(works, ['id_order', IdSelected]))
   }
 
   function getOrderIsStorage(id) {
@@ -95,6 +99,7 @@ export const WorksData = () => {
             titleSelect={textHeader}
             optionsList={otkUser}
             setFilterList={setFilterList}
+            templateForm={worksHeader}
             mask={'user_otk'}
           />
         )
@@ -104,11 +109,20 @@ export const WorksData = () => {
 
   useEffect(() => {
     switch (actionButton) {
+      case 'add':
+        setIsOpenModal(true)
+        setSelectionByContext({})
+        setIsOpenContextMenu(false)
+        break
       case 'delete':
         setIsOpenModal(true)
+        setIsOpenContextMenu(false)
+
         break
       case 'edit':
         setIsOpenModal(true)
+        setIsOpenContextMenu(false)
+
         break
       default:
         setIsOpenContextMenu(false)
@@ -155,9 +169,12 @@ export const WorksData = () => {
       )}
       {isOpenModal && (
         <MyModal
-          isOpenModal={isOpenModal}
+          // isOpenModal={isOpenModal}
           setIsOpenModal={setIsOpenModal}
-          editData={orders}
+          templateForm={worksHeader}
+          datas={setDataGet}
+          editData={selectionByContext}
+          users={users}
         />
       )}
       {workers.length ? (

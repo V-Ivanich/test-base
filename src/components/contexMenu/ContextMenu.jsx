@@ -19,6 +19,7 @@ export const ContextMenu = ({
         <div className='context-container'>
           {temlateBtn.map((b) => (
             <button
+              className='btn-user'
               data-val={b.value}
               key={b.name}
               onClick={() => setActionBtn(b.value)}>

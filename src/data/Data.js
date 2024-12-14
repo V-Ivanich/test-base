@@ -12,15 +12,19 @@ const headers = [
 ]
 
 const worksHeader = [
-  { name: 'Заказ', type: 'text' },
-  { name: 'Дата', type: 'date' },
-  { name: 'Кол-во', type: 'text' },
-  { name: 'Исполнитель', type: 'text' },
-  { name: 'ОТК исполнитель', type: 'text' },
-  { name: 'Дата ОТК', type: 'date' },
-  { name: 'Годные', type: 'text' },
-  { name: 'Условно', type: 'text' },
-  { name: 'Брак', type: 'text' },
+  { name: 'Заказ', type: 'text', key_name: 'id_order' },
+  { name: 'Дата', type: 'date', key_name: 'date' },
+  { name: 'Кол-во', type: 'text', key_name: 'incount' },
+  { name: 'Исполнитель', type: 'text', key_name: 'user' },
+  { name: 'ОТК исполнитель', type: 'text', key_name: 'user_otk' },
+  { name: 'Дата ОТК', type: 'date', key_name: 'date_otk' },
+  { name: 'Годные', type: 'text', key_name: 'goot' },
+  { name: 'Условно', type: 'text', key_name: 'no_goot' },
+  { name: 'Брак', type: 'text', key_name: 'fuck' },
 ]
 
-export { headers, worksHeader }
+const usersHeader = [
+  { name: 'Имя', type: 'text', key_name: 'name' },
+  { name: 'Должность', type: 'select', key_name: 'status' },
+]
+export { headers, worksHeader, usersHeader }
