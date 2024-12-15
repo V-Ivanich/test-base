@@ -5,9 +5,10 @@ import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 const MySelect = (props) => {
-  const { titleSelect, optionsList, mask, setFilterList } = props
-  const [sessionList, setSessionList] = useState([])
+  const { placeholder, optionsList, mask, setFilterList, mode } = props
+  const [sessionList, setSessionList] = useState(optionsList)
   const [isOpen, setIsOpen] = useState(false)
+  const [getPlaceholder, setPlaceholder] = useState(placeholder)
 
   const rerenderOptionList = () => {
     const rewriteOptionsList = optionsList.map((item) => {
@@ -23,7 +24,7 @@ const MySelect = (props) => {
     setSessionList(rewriteOptionsList)
   }
 
-  const handleClick = (e) => {
+  const handleClickPlaceholder = (e) => {
     if (e.target.nodeName === 'UL') return
     sessionStorage.removeItem('id_order')
 
@@ -92,47 +93,44 @@ const MySelect = (props) => {
   }, [])
 
   return (
-    <div className='wrapper-select' onClick={handleClick}>
-      <div className='selected-text'>{titleSelect}</div>
-      {isOpen && (
-        <ul className='select-options'>
-          {sessionList.map((option) => (
-            <li
-              key={option.id}
-              data-value={option.id}
-              className={option.active ? 'btn select-active' : 'btn'}
-              onClick={handleOptionsClick}>
-              {option.name}
-            </li>
-          ))}
-        </ul>
+    <div className='wrapper-select' onClick={handleClickPlaceholder}>
+      <label className='selected-text'>{getPlaceholder}</label>
+      {!isOpen ? (
+        <img
+          src={img_down}
+          alt='images'
+          width={14}
+          style={{ filter: 'invert(75%)', marginLeft: 4 }}
+        />
+      ) : (
+        <img
+          src={img_up}
+          alt='images'
+          width={14}
+          style={{ filter: 'invert(75%)', marginLeft: 4 }}
+        />
       )}
-      <div className='images-arrow'>
-        {!isOpen ? (
-          <img
-            src={img_down}
-            alt='images'
-            width={14}
-            style={{ filter: 'invert(75%)' }}
-          />
-        ) : (
-          <img
-            src={img_up}
-            alt='images'
-            width={14}
-            style={{ filter: 'invert(75%)' }}
-          />
-        )}
-      </div>
+      <ul className={isOpen ? 'select-options show' : 'select-options'}>
+        {sessionList.map((option) => (
+          <li
+            key={option.id}
+            data-value={option.id}
+            className={option.active ? 'btn select-active' : 'btn'}
+            onClick={handleOptionsClick}>
+            {option.name}
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
 
 MySelect.propTypes = {
-  titleSelect: PropTypes.string,
+  placeholder: PropTypes.string,
   mask: PropTypes.string,
   optionsList: PropTypes.array.isRequired,
   setFilterList: PropTypes.func,
+  mode: PropTypes.string,
 }
 
 export { MySelect }

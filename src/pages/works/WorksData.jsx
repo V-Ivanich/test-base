@@ -86,9 +86,10 @@ export const WorksData = () => {
       if (textHeader === 'Исполнитель') {
         return (
           <MySelect
-            titleSelect={textHeader}
+            placeholder={textHeader}
             optionsList={workerUser}
             setFilterList={setFilterList}
+            mode='multi'
             mask={'user'}
           />
         )
@@ -96,9 +97,10 @@ export const WorksData = () => {
       if (textHeader === 'ОТК исполнитель') {
         return (
           <MySelect
-            titleSelect={textHeader}
+            placeholder={textHeader}
             optionsList={otkUser}
             setFilterList={setFilterList}
+            mode='multi'
             templateForm={worksHeader}
             mask={'user_otk'}
           />

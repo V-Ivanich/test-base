@@ -91,14 +91,12 @@ export const BaseGeneral = () => {
 
       default:
         setIsOpenContext(false)
-        // setIsOpenModal(true)
         break
     }
   }, [actionBtn])
 
   useEffect(() => {
     if (isActive) {
-      // setDataGet(allorders.sort(compare))
       setDataGet(sortBy(allorders, 'date_out'))
     } else setDataGet(allorders)
   }, [allorders, isActive])
