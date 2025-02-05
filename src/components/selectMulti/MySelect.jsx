@@ -1,7 +1,7 @@
 import './my-select.css'
 import img_up from '../../images/up.png'
 import img_down from '../../images/down.png'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import PropTypes from 'prop-types'
 
 const MySelect = (props) => {
@@ -10,19 +10,13 @@ const MySelect = (props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [getPlaceholder, setPlaceholder] = useState(placeholder)
 
-  const rerenderOptionList = () => {
-    const rewriteOptionsList = optionsList.map((item) => {
-      return { ...item, active: false }
-    })
+  // const rerenderOptionList = () => {
+  //   const rewriteOptionsList = optionsList.map((item) => {
+  //     return { ...item, active: false }
+  //   })
 
-    rewriteOptionsList.unshift({
-      id: 'first',
-      name: 'Все',
-      active: true,
-      status: null,
-    })
-    setSessionList(rewriteOptionsList)
-  }
+  //   setSessionList(rewriteOptionsList)
+  // }
 
   const handleClickPlaceholder = (e) => {
     if (e.target.nodeName === 'UL') return
@@ -38,12 +32,86 @@ const MySelect = (props) => {
     setIsOpen(!isOpen)
   }
 
-  const handleOptionsClick = (event) => {
-    event.stopPropagation()
-    const id = event.target.dataset.value
-    if (id === 'first') {
-      const resetAll = sessionList.map((item) => {
-        if (item.id === 'first') {
+  // const handleOptionsClick = (event) => {
+  //   event.stopPropagation()
+  //   const id = event.target.dataset.value
+  //   if (id === 'first') {
+  //     const resetAll = sessionList.map((item) => {
+  //       if (item.id === 'first') {
+  //         return { ...item, active: true }
+  //       } else
+  //         return {
+  //           ...item,
+  //           active: false,
+  //         }
+  //     })
+  //     setSessionList(resetAll)
+  //     sessionStorage.setItem(`list_${mask}`, JSON.stringify(resetAll))
+  //   } else {
+  //     const activeUser = sessionList.map((elem) => {
+  //       if (elem.id === 'first') {
+  //         return { ...elem, active: false }
+  //       }
+  //       if (elem.id === id) {
+  //         return { ...elem, active: !elem.active }
+  //       }
+  //       return elem
+  //     })
+  //     const checkedItems = activeUser.filter((el) => el.active === true)
+  //     if (
+  //       checkedItems.length === sessionList.length - 1 ||
+  //       checkedItems.length === 0
+  //     ) {
+  //       const resetAll = sessionList.map((item) => {
+  //         if (item.id === 'first') {
+  //           return { ...item, active: true }
+  //         } else {
+  //           return { ...item, active: false }
+  //         }
+  //       })
+  //       setSessionList(resetAll)
+  //       sessionStorage.setItem(`list_${mask}`, JSON.stringify(resetAll))
+  //       return
+  //     }
+
+  //     setSessionList(activeUser)
+  //     sessionStorage.setItem(`list_${mask}`, JSON.stringify(activeUser))
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   const storage = sessionStorage.getItem(`list_${mask}`)
+  //   if (storage) {
+  //     setSessionList(JSON.parse(storage))
+  //   } else rerenderOptionList()
+  // }, [])
+
+  // Новые функции
+  const handleOptionsClick = (e) => {
+    e.stopPropagation()
+    if (mode !== 'multi') {
+      setPlaceholder(e.target.innerText)
+      setIsOpen(false)
+    }
+    const newUpdate = updateOptionsList(e.target.innerText)
+    setSessionList(newUpdate)
+    // setFilterList(newUpdate)
+  }
+  //Обновление активных пользователей
+  const updateOptionsList = (name) => {
+    let newList
+    if (mode === 'multi') {
+      newList = updateModeMulti(name)
+    } else {
+      newList = updateModeDefault(name)
+    }
+    return newList
+  }
+
+  function updateModeMulti(name) {
+    if (name === 'Все') {
+      const newList = sessionList.map((item) => {
+        if (item.name === 'Все') {
           return { ...item, active: true }
         } else
           return {
@@ -51,14 +119,13 @@ const MySelect = (props) => {
             active: false,
           }
       })
-      setSessionList(resetAll)
-      sessionStorage.setItem(`list_${mask}`, JSON.stringify(resetAll))
+      return newList
     } else {
       const activeUser = sessionList.map((elem) => {
-        if (elem.id === 'first') {
+        if (elem.name === 'Все') {
           return { ...elem, active: false }
         }
-        if (elem.id === id) {
+        if (elem.name === name) {
           return { ...elem, active: !elem.active }
         }
         return elem
@@ -68,29 +135,29 @@ const MySelect = (props) => {
         checkedItems.length === sessionList.length - 1 ||
         checkedItems.length === 0
       ) {
-        const resetAll = sessionList.map((item) => {
-          if (item.id === 'first') {
+        const newList = sessionList.map((item) => {
+          if (item.name === 'Все') {
             return { ...item, active: true }
           } else {
             return { ...item, active: false }
           }
         })
-        setSessionList(resetAll)
-        sessionStorage.setItem(`list_${mask}`, JSON.stringify(resetAll))
-        return
-      }
 
-      setSessionList(activeUser)
-      sessionStorage.setItem(`list_${mask}`, JSON.stringify(activeUser))
+        return newList
+      }
+      return activeUser
     }
   }
 
-  useEffect(() => {
-    const storage = sessionStorage.getItem(`list_${mask}`)
-    if (storage) {
-      setSessionList(JSON.parse(storage))
-    } else rerenderOptionList()
-  }, [])
+  function updateModeDefault(name) {
+    const newList = sessionList.map((item) => {
+      if (item.name === name) {
+        return { ...item, active: true }
+      }
+      return { ...item, active: false }
+    })
+    return newList
+  }
 
   return (
     <div className='wrapper-select' onClick={handleClickPlaceholder}>

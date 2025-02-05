@@ -33,14 +33,11 @@ const Users = () => {
     })),
   )
 
-  // const [isOpen, setIsOpen] = useState(false)
-  // const [isSelect, setIsSelect] = useState(null)
-
-  const [dataGet, setDataGet] = useState([])
+  // const [dataGet, setDataGet] = useState([])
   const [isOpenContextMenu, setIsOpenContextMenu] = useState(false)
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [actionButton, setActionButton] = useState(null)
-  const [selectionByContext, setSelectionByContext] = useState({})
+  const [contextID, setContextID] = useState({})
   const [pos, setPos] = useState({ x: 0, y: 0 })
 
   const handleRowUser = (event) => {
@@ -48,8 +45,7 @@ const Users = () => {
     setIsOpenContextMenu(true)
     setActionButton('')
     setPos({ x: event.clientX, y: event.clientY })
-    const IdSelected = event.target.parentNode.firstElementChild.innerText
-    setSelectionByContext(find(users, ['id_order', IdSelected]))
+    setContextID(event.target.parentNode.id)
     // const curr = refBody.current
     // curr.childNodes.forEach((el) => {
     //   el.classList.remove('row-user-active')
@@ -62,18 +58,16 @@ const Users = () => {
     switch (actionButton) {
       case 'add':
         setIsOpenModal(true)
-        setSelectionByContext({})
+        setContextID({})
+        setIsOpenContextMenu(false)
+        break
+      case 'edit':
+        setIsOpenModal(true)
         setIsOpenContextMenu(false)
         break
       case 'delete':
         setIsOpenModal(true)
         setIsOpenContextMenu(false)
-
-        break
-      case 'edit':
-        setIsOpenModal(true)
-        setIsOpenContextMenu(false)
-
         break
       default:
         setIsOpenContextMenu(false)
@@ -93,12 +87,12 @@ const Users = () => {
       )}
       {isOpenModal && (
         <MyModal
-          isOpenModal={isOpenModal}
           setIsOpenModal={setIsOpenModal}
           templateForm={usersHeader}
-          datas={setDataGet}
-          editData={selectionByContext}
-          users={users}
+          patch='users'
+          actionBtn={actionButton}
+          idData={contextID}
+          mode='default'
         />
       )}
       <div className='table-container'>

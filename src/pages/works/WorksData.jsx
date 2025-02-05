@@ -63,8 +63,7 @@ export const WorksData = () => {
     setIsOpenContextMenu(true)
     setActionButton('')
     setPos({ x: event.clientX, y: event.clientY })
-    const IdSelected = event.target.parentNode.firstElementChild.innerText
-    setSelectionByContext(find(works, ['id_order', IdSelected]))
+    setSelectionByContext(event.target.parentNode.id)
   }
 
   function getOrderIsStorage(id) {
@@ -77,8 +76,23 @@ export const WorksData = () => {
   const workerUser = filter(workers, function (o) {
     return o.status !== 'otk'
   })
+
+  workerUser.unshift({
+    id: 'first',
+    name: 'Все',
+    active: true,
+    status: null,
+  })
+
   const otkUser = filter(workers, function (o) {
     return o.status === 'otk'
+  })
+
+  otkUser.unshift({
+    id: 'first',
+    name: 'Все',
+    active: true,
+    status: null,
   })
 
   function renderHeader(textHeader) {
@@ -171,7 +185,6 @@ export const WorksData = () => {
       )}
       {isOpenModal && (
         <MyModal
-          // isOpenModal={isOpenModal}
           setIsOpenModal={setIsOpenModal}
           templateForm={worksHeader}
           datas={setDataGet}
@@ -193,6 +206,7 @@ export const WorksData = () => {
               filterOrders.map((el) => (
                 <tr
                   key={el.id}
+                  id={el.id}
                   className='row-tab'
                   onContextMenu={handleRowsWorks}>
                   {keysCol.map((kl) => (

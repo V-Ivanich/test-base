@@ -5,11 +5,12 @@ import { useShallow } from 'zustand/shallow'
 import './App.css'
 
 function App() {
-  const { fetchAll, fetchWorks, fetchUsers } = useAllBase(
+  const { fetchAll, fetchWorks, fetchUsers, fetchOptions } = useAllBase(
     useShallow((state) => ({
       fetchAll: state.fetchAll,
       fetchWorks: state.fetchWorks,
       fetchUsers: state.fetchUsers,
+      fetchOptions: state.fetchOptions,
     })),
   )
 
@@ -17,6 +18,7 @@ function App() {
     fetchAll()
     fetchWorks()
     fetchUsers()
+    fetchOptions()
   }, [])
 
   return (

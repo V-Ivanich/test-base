@@ -38,17 +38,105 @@
       "date_cashe": "2024-10-24",
       "date_out": "2024-01-21",
       "active": true
+    },
+    {
+      "id": "3593",
+      "id_order": "2025-02-04",
+      "order": "OOO Ebati",
+      "ispolnitel": "Impuls",
+      "type_item": "ZnSe",
+      "coint": "120",
+      "inside": "ttg 900sjsjd3trr",
+      "outside": "hye moe0000",
+      "date_cashe": "2025-02-06",
+      "date_out": "2025-02-27",
+      "active": ""
+    },
+    {
+      "id": "7e6c",
+      "id_order": "2025-02-07",
+      "order": "ЗАО Tydex",
+      "ispolnitel": "Impuls000000",
+      "type_item": "njkkl",
+      "coint": "150",
+      "inside": "hgjjkkk",
+      "outside": "2843743783829",
+      "date_cashe": "2025-02-17",
+      "date_out": "2025-03-09",
+      "active": ""
+    },
+    {
+      "id": "aea7",
+      "id_order": "2025-02-09",
+      "order": "OOO Arsenal",
+      "ispolnitel": "Impuls",
+      "type_item": "Si",
+      "coint": "250",
+      "inside": "ttg-100225-001",
+      "outside": "arsen-42",
+      "date_cashe": "2025-02-11",
+      "date_out": "2025-03-04",
+      "active": ""
+    }
+  ],
+  "statusOptions": [
+    {
+      "id": "opt123",
+      "name": "оптик"
+    },
+    {
+      "id": "zag098",
+      "name": "заготовщик"
+    },
+    {
+      "id": "otk876",
+      "name": "отк"
+    },
+    {
+      "id": "chpu456",
+      "name": "чпу"
+    },
+    {
+      "id": "centr0129",
+      "name": "центрировка"
+    },
+    {
+      "id": "09876yt56",
+      "name": "другое"
     }
   ],
   "users": [
-    { "id": "o113v", "name": "Vasia", "status": "optik" },
-    { "id": "o202s", "name": "Serg", "status": "optik" },
-    { "id": "o32k", "name": "Kate", "status": "optik" },
-    { "id": "z41a", "name": "Andrey", "status": "grinder" },
-    { "id": "i44d", "name": "Dasha", "status": "otk" },
-    { "id": "v55", "name": "Valia", "status": "otk" }
+    {
+      "id": "o113v",
+      "name": "Vasia",
+      "status": "optik"
+    },
+    {
+      "id": "o202s",
+      "name": "Serg",
+      "status": "optik"
+    },
+    {
+      "id": "o32k",
+      "name": "Kate",
+      "status": "optik"
+    },
+    {
+      "id": "z41a",
+      "name": "Andrey",
+      "status": "grinder"
+    },
+    {
+      "id": "i44d",
+      "name": "Dasha",
+      "status": "otk"
+    },
+    {
+      "id": "v55",
+      "name": "Valia",
+      "status": "otk"
+    }
   ],
-
   "works": [
     {
       "id": "3738d",

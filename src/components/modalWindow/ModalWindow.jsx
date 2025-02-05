@@ -1,73 +1,81 @@
-import { headers, worksHeader } from '../../data/Data'
 import { useState, useEffect } from 'react'
+import { MySelect } from '../selectMulti/MySelect'
+import { useShallow } from 'zustand/shallow'
+import { useAllBase } from '../../store/Store'
+import { find } from 'lodash'
 import { MyCheck } from '../my_checkbox/myCheckbox'
 
 import './modal_window.css'
+import { filter } from 'lodash'
 
 export function MyModal({
   // isOpenModal,
-  setIsOpenModal,
-  templateForm,
-  datas,
-  editData,
-  users,
+  setIsOpenModal, //тригер закрытия модального окна
+  templateForm, // шаблон формы
+  // datas,
+  actionBtn,
+  idData,
+  // users,
+  mode, // состояние в котором находится окно, (добавление, редакция, удаление)
+  // optionsDefault,
+  patch,
 }) {
   const initialState = {}
-
-  startArguments()
-
-  function startArguments() {
-    if (Object.keys(editData).length && Array.isArray(templateForm)) {
-      Object.assign(initialState, editData)
-    } else if (Array.isArray(templateForm)) {
-      templateForm.forEach((elem) => {
-        initialState[elem.key_name] = ''
-      })
+  for (let n = 0; n < templateForm.length; n++) {
+    if ([templateForm[n]['type']] === 'checkbox') {
+      initialState[templateForm[n]['key_name']] = false
+    } else {
+      initialState[templateForm[n]['key_name']] = ''
     }
-    return initialState
   }
+  // templateForm.map((elem) => {
+  //   if (elem.type === 'checkbox') {
+  //     return ([elem.key_name] = false)
+  //   } else {
+  //     return ([elem.key_name] = '')
+  //   }
+  // })
 
-  const [valueState, setValueState] = useState(initialState)
-  const [isData, setIsData] = useState([])
-  // const [isOpenContextMenu, setIsOpenContextMenu] = useState(true)
+  const { allorders, EditOrder, AddOrder } = useAllBase(
+    useShallow((state) => ({
+      allorders: state[patch],
+      EditOrder: state.EditOrder,
+      AddOrder: state.AddOrder,
+    })),
+  )
+
+  const [filterObject, setFilterObject] = useState([])
 
   function close() {
     setIsOpenModal(false)
-    // setIsOpenContextMenu(false)
   }
 
   const handleSubmit = () => {
-    console.log(valueState, 'form return!')
-    if (!Array.isArray(templateForm)) {
-      datas({ delete: true })
-    } else datas(valueState)
+    if (actionBtn === 'add') {
+      AddOrder({ filterObject, patch })
+    } else {
+      EditOrder({ filterObject, patch, idData })
+    }
     close()
   }
 
-  const handleChanges = ({ target }) => {
-    console.log(valueState)
-    console.log(target.value, 'changes!!!')
-    console.log(target.name, 'имя????')
-    setValueState({
-      ...valueState,
-      [target.name]: target.value,
-    })
+  const handleChecked = ({ target }) => {
+    console.log('checked!!!')
+    setFilterObject({ ...filterObject, [target.name]: target.checked })
   }
 
-  const handleChecked = ({ target }) => {
-    console.log(target.checked)
-    setValueState({
-      ...valueState,
-      [target.name]: target.checked,
-    })
+  const handleChanges = ({ target }) => {
+    setFilterObject({ ...filterObject, [target.name]: target.value })
   }
 
   useEffect(() => {
-    const textHeader = sessionStorage.getItem('page')
-    if (textHeader === 'general') {
-      setIsData(headers)
-    } else setIsData(worksHeader)
-  }, [])
+    if (actionBtn === 'edit') {
+      const filterData = find(allorders, ['id', idData])
+      setFilterObject(filterData)
+    } else if (actionBtn === 'add') {
+      setFilterObject(initialState)
+    }
+  }, [allorders])
 
   return (
     <>
@@ -79,34 +87,33 @@ export function MyModal({
             &#10006;
           </button>
           <div className='modal__form-content'>
-            {Array.isArray(templateForm)
+            {filterObject
               ? templateForm.map((elem) => (
                   <label key={elem.name} className='modal__label'>
                     {elem.name} -
                     {elem.type === 'select' ? (
-                      <select
+                      <MySelect
+                        key={elem.name}
                         onChange={handleChanges}
-                        name={elem.name}
-                        value={valueState[elem.name]}>
-                        <option value=''></option>
-                        {users.map((user) => (
-                          <option key={user.id} value={user.status}>
-                            {user.status}
-                          </option>
-                        ))}
-                      </select>
+                        placeholder={mode === 'multi' ? elem.name : ''}
+                        mode={mode}
+                        value={filterObject[elem.name]}
+                        optionsList={
+                          mode !== 'multi' ? optionsDefault : users
+                        }></MySelect>
                     ) : (
                       <input
                         type={elem.type}
                         name={elem.key_name}
+                        key={elem.key_name}
                         value={
                           elem.type === 'checkbox'
                             ? ''
-                            : valueState[elem.key_name]
+                            : filterObject[elem.key_name]
                         }
                         checked={
                           elem.type === 'checkbox'
-                            ? valueState[elem.key_name]
+                            ? filterObject[elem.key_name]
                             : ''
                         }
                         onChange={

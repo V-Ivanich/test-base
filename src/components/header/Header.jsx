@@ -4,7 +4,7 @@ import './header.css'
 export const Header = () => {
   const handleClearStorageKey = (e) => {
     console.log(e.target)
-    // localStorage.setItem('id_order', '')
+    localStorage.setItem('id_order', '')
   }
 
   return (

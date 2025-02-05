@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import { useShallow } from 'zustand/shallow'
 import { useAllBase } from '../../store/Store'
 import { ContextMenu } from '../../components/contexMenu/ContextMenu'
-import { sortBy, find } from 'lodash'
+import { sortBy, uniqueId } from 'lodash'
+// import { CreateOrder } from '../../utils/CreateOrder'
 import './general.css'
 import { MyModal } from '../../components/modalWindow/ModalWindow'
 
@@ -40,7 +41,7 @@ export const BaseGeneral = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [isOpenContext, setIsOpenContext] = useState(false)
   const [actionBtn, setActionBtn] = useState('')
-  const [selectionByContext, setSelectionByContext] = useState({})
+  const [contextID, setContextID] = useState({})
 
   const navigate = useNavigate()
 
@@ -49,8 +50,7 @@ export const BaseGeneral = () => {
     setIsOpenContext(true)
     setActionBtn('')
     setPosition({ x: e.clientX, y: e.clientY })
-    const IdSelected = e.target.parentNode.firstElementChild.innerText
-    setSelectionByContext(find(allorders, ['id_order', IdSelected]))
+    setContextID(e.target.parentNode.id)
   }
 
   const handleRowClick = ({ target }) => {
@@ -80,7 +80,7 @@ export const BaseGeneral = () => {
   useEffect(() => {
     switch (actionBtn) {
       case 'add':
-        setSelectionByContext({})
+        // setSelectionByContext({})
         setIsOpenContext(false)
         setIsOpenModal(true)
         break
@@ -95,6 +95,7 @@ export const BaseGeneral = () => {
     }
   }, [actionBtn])
 
+  // сортировка по дате
   useEffect(() => {
     if (isActive) {
       setDataGet(sortBy(allorders, 'date_out'))
@@ -113,43 +114,44 @@ export const BaseGeneral = () => {
       )}
       {isOpenModal && (
         <MyModal
-          isOpenModal={isOpenModal}
           setIsOpenModal={setIsOpenModal}
           templateForm={headers}
-          datas={setDataGet}
-          editData={selectionByContext}
+          patch='allorders'
+          actionBtn={actionBtn}
+          // mode='multi'
+          idData={contextID}
         />
       )}
-      <table className='general-table'>
-        <thead>
-          <tr>
-            {headers.map((nam) => {
-              if (nam.name !== 'Завершение') {
-                return <th key={nam.name}>{hedersTitle(nam.name)}</th>
-              }
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {dataGet.length ? (
-            dataGet.map((el) => (
+      {dataGet.length ? (
+        <table className='general-table'>
+          <thead>
+            <tr>
+              {headers.map((nam) => {
+                if (nam.name !== 'Завершение') {
+                  return <th key={nam.name}>{hedersTitle(nam.name)}</th>
+                }
+              })}
+            </tr>
+          </thead>
+          <tbody>
+            {dataGet.map((el) => (
               <tr
-                key={el.id}
+                id={el.id}
+                key={uniqueId()}
+                // id={el.id}
                 className='row-tab'
                 onClick={handleRowClick}
                 onContextMenu={handleContext}>
                 {keysCol.map((kl) => (
-                  <td key={kl}>{el[kl]}</td>
+                  <td key={uniqueId()}>{el[kl]}</td>
                 ))}
               </tr>
-            ))
-          ) : (
-            <tr>
-              <th>Loading...</th>
-            </tr>
-          )}
-        </tbody>
-      </table>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        'Loading...'
+      )}
     </div>
   )
 }
