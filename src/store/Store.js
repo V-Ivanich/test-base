@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
+import { CreateOrder, EditOrder, RemoveOrder } from '../utils'
 
 export const useAllBase = create(
   devtools((set, get) => ({
@@ -10,47 +11,17 @@ export const useAllBase = create(
     loading: false,
     error: null,
 
-    AddOrder: async ({ filterObject, patch }) => {
-      try {
-        const response = await fetch(`http://127.0.0.1:3001/${patch}`, {
-          method: 'POST',
-          body: JSON.stringify(filterObject),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-        console.log(response)
-      } catch (error) {
-        console.error(error)
-      }
-      const newObj = [...get()[patch], filterObject]
+    AddOrder: ({ filterObject: order, patch }) => {
+      CreateOrder({ order, patch })
+      const newObj = [...get()[patch], order]
       set({ [patch]: newObj })
     },
 
-    EditOrder: async ({ filterObject, patch, idData }) => {
-      try {
-        const response = await fetch(
-          `http://127.0.0.1:3001/${patch}/${idData}`,
-          {
-            method: 'PATCH',
-            body: JSON.stringify(filterObject),
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          },
-        )
-        const data = await response.json()
-        console.log(data)
-
-        if (!response.ok) {
-          throw new Error('Проблема с сервером, попробуйте позже.')
-        }
-      } catch (error) {
-        console.error(error)
-      }
+    EditOrders: ({ filterObject: editOrder, patch, idData: id }) => {
+      EditOrder({ id, patch, editOrder })
       const indexOrder = get()[patch].map((o) => {
-        if (o.id === idData) {
-          return filterObject
+        if (o.id === id) {
+          return editOrder
         } else return o
       })
       set({ [patch]: indexOrder })

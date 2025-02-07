@@ -21,12 +21,6 @@ const keysCol = [
   'date_out',
 ]
 
-const temlateBtn = [
-  { name: 'Добавить', value: 'add' },
-  { name: 'Изменить', value: 'edit' },
-  { name: 'Удалить', value: 'delete' },
-]
-
 export const BaseGeneral = () => {
   sessionStorage.setItem('page', 'general')
   const { allorders } = useAllBase(
@@ -109,7 +103,6 @@ export const BaseGeneral = () => {
           position={position}
           setActionBtn={setActionBtn}
           setIsOpenContext={setIsOpenContext}
-          temlateBtn={temlateBtn}
         />
       )}
       {isOpenModal && (

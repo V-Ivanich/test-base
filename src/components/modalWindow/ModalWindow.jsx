@@ -15,32 +15,38 @@ export function MyModal({
   // datas,
   actionBtn,
   idData,
-  // users,
   mode, // состояние в котором находится окно, (добавление, редакция, удаление)
   // optionsDefault,
   patch,
 }) {
-  const initialState = {}
-  for (let n = 0; n < templateForm.length; n++) {
-    if ([templateForm[n]['type']] === 'checkbox') {
-      initialState[templateForm[n]['key_name']] = false
-    } else {
-      initialState[templateForm[n]['key_name']] = ''
-    }
-  }
-  // templateForm.map((elem) => {
-  //   if (elem.type === 'checkbox') {
-  //     return ([elem.key_name] = false)
-  //   } else {
-  //     return ([elem.key_name] = '')
-  //   }
-  // })
+  let initialState = {}
+  console.log(templateForm)
 
-  const { allorders, EditOrder, AddOrder } = useAllBase(
+  // for (let n = 0; n < templateForm.length; n++) {
+  //   if ([templateForm[n]['type']] === 'checkbox') {
+  //     initialState[templateForm[n]['key_name']] = false
+  //   } else {
+  //     initialState[templateForm[n]['key_name']] = ''
+  //   }
+  // }
+
+  const StartData = () => {}
+  initialState = templateForm.map((elem) => {
+    if (elem.type === 'checkbox') {
+      return { [elem.key_name]: false }
+    } else {
+      return ([elem.key_name] = '')
+    }
+  })
+
+  // StartData()
+
+  const { currentObject, EditOrders, AddOrder, users } = useAllBase(
     useShallow((state) => ({
-      allorders: state[patch],
-      EditOrder: state.EditOrder,
+      currentObject: state[patch],
+      EditOrders: state.EditOrders,
       AddOrder: state.AddOrder,
+      users: state.users,
     })),
   )
 
@@ -53,8 +59,8 @@ export function MyModal({
   const handleSubmit = () => {
     if (actionBtn === 'add') {
       AddOrder({ filterObject, patch })
-    } else {
-      EditOrder({ filterObject, patch, idData })
+    } else if (actionBtn === 'edit') {
+      EditOrders({ filterObject, patch, idData })
     }
     close()
   }
@@ -69,13 +75,16 @@ export function MyModal({
   }
 
   useEffect(() => {
+    console.log(actionBtn)
     if (actionBtn === 'edit') {
-      const filterData = find(allorders, ['id', idData])
+      const filterData = find(currentObject, ['id', idData])
+      console.log(filterData)
       setFilterObject(filterData)
     } else if (actionBtn === 'add') {
+      StartData()
       setFilterObject(initialState)
     }
-  }, [allorders])
+  }, [actionBtn])
 
   return (
     <>

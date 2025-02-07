@@ -17,12 +17,6 @@ import './users.css'
 
 const keysCol = ['name', 'status']
 
-const temlateBtn = [
-  { name: 'Добавить', value: 'add' },
-  { name: 'Изменить', value: 'edit' },
-  { name: 'Удалить', value: 'delete' },
-]
-
 const Users = () => {
   sessionStorage.setItem('page', 'users')
   const refBody = useRef(null)
@@ -82,7 +76,6 @@ const Users = () => {
           position={pos}
           setActionBtn={setActionButton}
           setIsOpenContext={setIsOpenContextMenu}
-          temlateBtn={temlateBtn}
         />
       )}
       {isOpenModal && (
@@ -91,8 +84,8 @@ const Users = () => {
           templateForm={usersHeader}
           patch='users'
           actionBtn={actionButton}
-          idData={contextID}
           mode='default'
+          idData={contextID}
         />
       )}
       <div className='table-container'>

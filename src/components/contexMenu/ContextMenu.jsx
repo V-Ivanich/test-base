@@ -1,11 +1,12 @@
 import './context-menu.css'
 
-export const ContextMenu = ({
-  position,
-  setActionBtn,
-  setIsOpenContext,
-  temlateBtn,
-}) => {
+const temlateBtn = [
+  { name: 'Добавить', value: 'add' },
+  { name: 'Изменить', value: 'edit' },
+  { name: 'Удалить', value: 'delete' },
+]
+
+export const ContextMenu = ({ position, setActionBtn, setIsOpenContext }) => {
   const { x, y } = position
 
   return (

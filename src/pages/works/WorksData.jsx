@@ -21,12 +21,6 @@ const keysCol = [
   'fuck',
 ]
 
-const temlateBtn = [
-  { name: 'Добавить', value: 'add' },
-  { name: 'Изменить', value: 'edit' },
-  { name: 'Удалить', value: 'delete' },
-]
-
 export const WorksData = () => {
   sessionStorage.setItem('page', 'work')
   const { works, users } = useAllBase(
@@ -180,16 +174,18 @@ export const WorksData = () => {
           position={pos}
           setActionBtn={setActionButton}
           setIsOpenContext={setIsOpenContextMenu}
-          temlateBtn={temlateBtn}
         />
       )}
       {isOpenModal && (
         <MyModal
           setIsOpenModal={setIsOpenModal}
           templateForm={worksHeader}
-          datas={setDataGet}
-          editData={selectionByContext}
-          users={users}
+          patch='works'
+          actionBtn={actionButton}
+          mode='multi'
+          // datas={setDataGet}
+          idData={selectionByContext}
+          // users={users}
         />
       )}
       {workers.length ? (

@@ -1,4 +1,4 @@
-async function EditOrder(id, patch, editOrder) {
+async function EditOrder({ id, patch, editOrder }) {
   try {
     const response = await fetch(`http://127.0.0.1:3001/${patch}/${id}`, {
       method: 'PATCH',
