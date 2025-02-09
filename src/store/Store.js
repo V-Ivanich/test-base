@@ -27,6 +27,14 @@ export const useAllBase = create(
       set({ [patch]: indexOrder })
     },
 
+    DeleteOrders: ({ idData, patch }) => {
+      RemoveOrder(idData, patch)
+      const indexOrder = get()[patch].filter((o) => {
+        o.id !== idData
+      })
+      set({ [patch]: indexOrder })
+    },
+
     fetchOptions: async () => {
       set({ loading: true })
 

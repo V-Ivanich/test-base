@@ -27,4 +27,11 @@ const usersHeader = [
   { name: 'Имя', type: 'text', key_name: 'name' },
   { name: 'Должность', type: 'select', key_name: 'status' },
 ]
-export { headers, worksHeader, usersHeader }
+
+const deleteMessage = [
+  'ВНИМАНИЕ!!!',
+  'Вы уверены, что хотите удалить эту запись?',
+  'Если передумали, кликните вне поля окна или нажмите крестик',
+]
+
+export { headers, worksHeader, usersHeader, deleteMessage }

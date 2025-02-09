@@ -7,8 +7,8 @@ async function EditOrder({ id, patch, editOrder }) {
         'Content-Type': 'application/json',
       },
     })
-    const data = await response.json()
-    console.log(data)
+    // const data = await response.json()
+    // console.log(data)
 
     if (!response.ok) {
       throw new Error('Проблема с сервером, попробуйте позже.')

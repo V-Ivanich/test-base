@@ -111,8 +111,8 @@ export const BaseGeneral = () => {
           templateForm={headers}
           patch='allorders'
           actionBtn={actionBtn}
-          // mode='multi'
           idData={contextID}
+          // mode='multi'
         />
       )}
       {dataGet.length ? (
