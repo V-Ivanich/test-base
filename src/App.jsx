@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Root } from './root/root'
 import { useAllBase } from './store/Store'
 import { useShallow } from 'zustand/shallow'
+import { ToastContainer } from 'react-toastify'
 import './App.css'
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
     <>
       <div className='app-wrapper'>
         <Root />
+        <ToastContainer />
       </div>
     </>
   )

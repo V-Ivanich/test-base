@@ -1,6 +1,6 @@
-async function RemoveOrder({ idOrder, patch }) {
+async function RemoveOrder({ idData, patch }) {
   try {
-    const res = await fetch(`http://127.0.0.1:3001/${patch}/${idOrder}`, {
+    const res = await fetch(`http://127.0.0.1:3001/${patch}/${idData}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

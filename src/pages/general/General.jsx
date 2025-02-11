@@ -82,6 +82,10 @@ export const BaseGeneral = () => {
         setIsOpenContext(false)
         setIsOpenModal(true)
         break
+      case 'delete':
+        setIsOpenContext(false)
+        setIsOpenModal(true)
+        break
 
       default:
         setIsOpenContext(false)

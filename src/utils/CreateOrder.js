@@ -1,8 +1,8 @@
-async function CreateOrder({ order, patch }) {
+async function CreateOrder({ filterObject, patch }) {
   try {
     const response = await fetch(`http://127.0.0.1:3001/${patch}`, {
       method: 'POST',
-      body: JSON.stringify(order),
+      body: JSON.stringify(filterObject),
       Headers: {
         'Content-Type': 'application/json',
       },

@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
+import { filter } from 'lodash'
 import { CreateOrder, EditOrder, RemoveOrder } from '../utils'
 
 export const useAllBase = create(
@@ -11,9 +12,9 @@ export const useAllBase = create(
     loading: false,
     error: null,
 
-    AddOrder: ({ filterObject: order, patch }) => {
-      CreateOrder({ order, patch })
-      const newObj = [...get()[patch], order]
+    AddOrder: ({ filterObject, patch }) => {
+      CreateOrder({ filterObject, patch })
+      const newObj = [...get()[patch], filterObject]
       set({ [patch]: newObj })
     },
 
@@ -28,10 +29,12 @@ export const useAllBase = create(
     },
 
     DeleteOrders: ({ idData, patch }) => {
-      RemoveOrder(idData, patch)
-      const indexOrder = get()[patch].filter((o) => {
+      RemoveOrder({ idData, patch })
+      const indexOrder = filter(get()[patch], (o) => {
+        console.log(o)
         o.id !== idData
       })
+      console.log(indexOrder)
       set({ [patch]: indexOrder })
     },
 
