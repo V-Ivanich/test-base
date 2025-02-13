@@ -2,8 +2,7 @@ import { NavLink } from 'react-router-dom'
 import './header.css'
 
 export const Header = () => {
-  const handleClearStorageKey = (e) => {
-    console.log(e.target)
+  const handleClearStorageKey = () => {
     localStorage.setItem('id_order', '')
   }
 

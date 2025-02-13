@@ -36,55 +36,6 @@
       "outside": "2843743783829",
       "date_cashe": "2025-02-19",
       "date_out": "2025-02-28"
-    },
-    {
-      "id": "4dac",
-      "id_order": "2025-01-28",
-      "order": "uuuii",
-      "ispolnitel": "Impuls",
-      "type_item": "Si",
-      "coint": "50",
-      "inside": "ttg-10-35-48-009",
-      "outside": "09090909",
-      "date_cashe": "2025-02-12",
-      "date_out": "2025-03-09"
-    },
-    {
-      "id": "d296",
-      "id_order": "2025-02-04",
-      "order": "ЗАО Tydex",
-      "ispolnitel": "Impuls",
-      "type_item": "Ge 120",
-      "coint": "34",
-      "inside": "ttg 900sjsjd3trr",
-      "outside": "pizdec111111",
-      "date_cashe": "2025-02-07",
-      "date_out": "2025-02-27"
-    },
-    {
-      "id": "2fc6",
-      "id_order": "2025-02-06",
-      "order": "ЗАО Tydex",
-      "ispolnitel": "Impuls",
-      "type_item": "ZnSe",
-      "coint": "120",
-      "inside": "hgjjkkk",
-      "outside": "hye moe0000",
-      "date_cashe": "2025-02-16",
-      "date_out": "2025-02-28"
-    },
-    {
-      "id": "06d0",
-      "id_order": "2025-02-05",
-      "order": "ЗАО Tydex",
-      "ispolnitel": "Impuls000000",
-      "type_item": "ZnSe",
-      "coint": "50",
-      "inside": "hgjjkkk",
-      "outside": "09090909",
-      "date_cashe": "2025-02-20",
-      "date_out": "2025-03-05",
-      "active": false
     }
   ],
   "statusOptions": [

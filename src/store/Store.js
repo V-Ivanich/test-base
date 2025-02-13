@@ -9,8 +9,14 @@ export const useAllBase = create(
     works: [],
     users: [],
     statusOptions: [],
+    followLink: '',
     loading: false,
     error: null,
+
+    ToggleStatusLink: (keyLink) => {
+      console.log(keyLink)
+      set((state) => ({ followLink: (state.followLink = keyLink) }))
+    },
 
     AddOrder: ({ filterObject, patch }) => {
       CreateOrder({ filterObject, patch })
@@ -31,10 +37,8 @@ export const useAllBase = create(
     DeleteOrders: ({ idData, patch }) => {
       RemoveOrder({ idData, patch })
       const indexOrder = filter(get()[patch], (o) => {
-        console.log(o)
-        o.id !== idData
+        return o.id !== idData
       })
-      console.log(indexOrder)
       set({ [patch]: indexOrder })
     },
 

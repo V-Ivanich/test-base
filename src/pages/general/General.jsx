@@ -22,10 +22,11 @@ const keysCol = [
 ]
 
 export const BaseGeneral = () => {
-  sessionStorage.setItem('page', 'general')
-  const { allorders } = useAllBase(
+  // sessionStorage.setItem('page', 'general')
+  const { allorders, ToggleStatusLink } = useAllBase(
     useShallow((state) => ({
       allorders: state.allorders,
+      ToggleStatusLink: state.ToggleStatusLink,
     })),
   )
 
@@ -48,10 +49,8 @@ export const BaseGeneral = () => {
   }
 
   const handleRowClick = ({ target }) => {
-    sessionStorage.setItem(
-      'id_order',
-      target.parentNode.firstElementChild.innerText,
-    )
+    console.log(target.parentNode.firstElementChild.innerText)
+    ToggleStatusLink(target.parentNode.firstElementChild.innerText)
     navigate('/works')
   }
 
